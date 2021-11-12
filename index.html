@@ -311,17 +311,17 @@
       <!-- <span class="instructions">The progress bubble below can transition between red, orange, and green depending on the current percentage.</span>
       <span class="instructions">Go ahead and try it out by using the text box below.</span> -->
       
-      <div class="green">
+      <div class="orange">
         <div class="progress">
           <div class="inner">
-            <div class="percent"><span>67</span>%</div>
+            <div class="percent"><span>50</span>%</div>
             <div class="water"></div>
             <div class="glare"></div>
           </div>
         </div>
       </div>
       
-      <span>Enter Percentage: <input type="text" placeholder="67" id="percent-box">%</span>
+      <span>Enter Percentage: <input type="text" placeholder="50" id="percent-box">%</span>
       
       <!-- <section id="copyright">
         <div>(c) 2015 June Hanabi - <a href="https://opensource.org/licenses/MIT">License MIT</a> </div>
@@ -364,18 +364,18 @@
           $(".progress .water").css("top", val + "%");
           
           if(valOrig < colorInc * 1)
-            $(".progress").parent().addClass("red");
+            $(".progress").parent().addClass("green");
           else if(valOrig < colorInc * 2)
             $(".progress").parent().addClass("orange");
           else
-            $(".progress").parent().addClass("green");
+            $(".progress").parent().addClass("red");
         }
         else
         {
           $(".progress").parent().removeClass();
-          $(".progress").parent().addClass("green");
-          $(".progress .water").css("top", 100 - 67 + "%");
-          $(".progress .percent").text(67 + "%");
+          $(".progress").parent().addClass("orange");
+          $(".progress .water").css("top", 100 - 50 + "%");
+          $(".progress .percent").text(50 + "%");
           $("#percent-box").val("");
         }
       });
