@@ -1,8 +1,306 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-    <script src="/index.js"></script>
-</head>
+  <head>
+    <meta http-equiv="Content-Type" X-Content-Type-Options="nosniff" content="text/html; charset=utf-8">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>smartShow_AR</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        display: grid;
+        place-items: center;
+    }
+    button {
+      position:absolute;
+      left: 10px;
+      width: 80px;
+      height: 40px;
+      margin: 10px;
+      font-size: 30px;
+    }
+    .progress {
+        position: absolute;
+        top: 10px;
+        left: 30%;
+        width: 50px;
+        border-width: 5px;
+        border-color: rgb(204, 75, 15);
+        /* border-radius: 20px; */
+    }
+    /* video::-webkit-media-controls {
+      display:none !important;
+    } */
+    .percentage {
+      top: 50px;
+      width: 100%;
+      border-radius: 25px;
+
+        /* transform:rotate(180deg) */
+    }
+    .block {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      width: 50px;
+      height: 10%;
+      background: rgb(44, 43, 43);
+      border-radius:25px 25px 0 0;
+      /* transform: translate(-50%, -50%); */
+    }
+    /* stick style */
+    .flex-container {
+        position: absolute;
+        top: 150px;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+    .popsicle-unit {
+        margin: 0 40px;
+    }
+    .popsicle {
+        display: block;
+        position: relative;
+        -webkit-animation: floating 2s ease infinite;
+                animation: floating 2s ease infinite;
+    }
+    .ice {
+        box-sizing: border-box;
+        display: block;
+        position: relative;
+        width: 10px;
+        height: 180px;
+        margin: auto;
+        border-radius: 35px 35px 10px 10px;
+        background-image: linear-gradient(to top, #fcd857, #fcd857 75%, #712b2a 75%, #712b2a);
+        background-origin: border-box;
+        border-right: 4px solid rgba(255,255,255,0.3);
+        border-left: 4px solid rgba(0,0,0,0.05);
+    }
+    .ice:before,
+    .ice:after {
+        content: '';
+        display: block;
+        width: 20%;
+        height: 70%;
+        position: absolute;
+        bottom: 0;
+        z-index: 5;
+        border-radius: 8px 8px 0 0;
+        background-image: linear-gradient(to right, rgba(0,0,0,0.025), rgba(0,0,0,0.025) 50%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.05));
+    }
+    .ice:before {
+        right: 50%;
+        margin-right: 10%;
+    }
+    .ice:after {
+        left: 50%;
+        margin-left: 10%;
+    }
+    .stick {
+        box-sizing: border-box;
+        width: 10px;
+        height: 40px;
+        margin: auto;
+        border-radius: 0 0 10px 10px;
+        background-color: #f9efd0;
+        border-top: 8px solid rgba(0,0,0,0.025);
+        border-right: 3px solid rgba(255,255,255,0.2);
+    }
+    .shadow {
+        display: block;
+        width: 60px;
+        height: 15px;
+        border-radius: 40%;
+        margin-top: 30px;
+        margin-right: auto;
+        margin-left: auto;
+        background-color: rgba(0,0,0,0.05);
+        -webkit-animation: floating-shadow 2s ease infinite;
+                animation: floating-shadow 2s ease infinite;
+    }
+    .rainbow .ice {
+        background-image: linear-gradient(to bottom, #ffbced 8%, #74e2fa 33%, #7892fd 66%, #ffbced 92%);
+        background-size: 200% 200%;
+        border-right: 4px solid rgba(255,255,255,0.5);
+        -webkit-animation: rainbow 3s linear infinite;
+                animation: rainbow 3s linear infinite;
+    }
+    .rainbow2 .ice {
+        background-image: linear-gradient(to bottom, #f3ff33 8%, #ffa233 33%, #33ff71 66%, #f3ff33 92%);
+        background-size: 200% 200%;
+        border-right: 4px solid rgba(255,255,255,0.5);
+        -webkit-animation: rainbow 3s linear infinite;
+                animation: rainbow 3s linear infinite;
+    }
+    @-webkit-keyframes floating {
+        0% {
+            transform: rotate(-20deg) translateY(5px);
+        }
+        50% {
+            transform: rotate(-20deg) translateY(15px);
+        }
+        100% {
+            transform: rotate(-20deg) translateY(5px);
+        }
+    }
+    @keyframes floating {
+        0% {
+            transform: rotate(-20deg) translateY(5px);
+        }
+        50% {
+            transform: rotate(-20deg) translateY(15px);
+        }
+        100% {
+            transform: rotate(-20deg) translateY(5px);
+        }
+    }
+    @-webkit-keyframes floating-shadow {
+        0% {
+            transform: scaleX(0.75);
+        }
+        50% {
+            transform: scaleX(1);
+        }
+        100% {
+            transform: scaleX(0.75);
+        }
+    }
+    @keyframes floating-shadow {
+        0% {
+            transform: scaleX(0.75);
+        }
+        50% {
+            transform: scaleX(1);
+        }
+        100% {
+            transform: scaleX(0.75);
+        }
+    }
+    @-webkit-keyframes rainbow {
+        0% {
+            background-position: 0% 200%;
+        }
+        100% {
+            background-position: 0% 0%;
+        }
+    }
+    @keyframes rainbow {
+        0% {
+            background-position: 0% 200%;
+        }
+        100% {
+            background-position: 0% 0%;
+        }
+    }
+    </style>
+  </head>
+  <body>
+    <!-- <div class="wrapper">
+      <span class="instructions">The progress bubble below can transition between red, orange, and green depending on the current percentage.</span>
+      <span class="instructions">Go ahead and try it out by using the text box below.</span>
+      
+      <div class="orange">
+        <div class="progress">
+          <div class="inner">
+            <div class="percent"><span>50</span>%</div>
+            <div class="water"></div>
+            <div class="glare"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a href="{{url_for('test')}}">我是測試</a>
+    <img src="people.png" width="100%"> -->
+    <button type="button" id="increaseBtn" style="top:30px">+</button>
+    <button type="button" id="decreaseBtn" style="top:70px">-</button>
+    <div class="progress" >
+      <video class="percentage" controls autoplay loop>
+        <source src="fire3.mp4" type="video/mp4">
+      </video>  
+      <div class="block"></div>
+    </div>
+    <div class="flex-container">
+        <div class="popsicle-unit rainbow2">
+            <div class="popsicle">
+                <div class="ice"></div>
+                <div class="stick"></div>
+            </div>
+            <div class="shadow"></div>
+        </div>
+        <div class="popsicle-unit rainbow">
+            <div class="popsicle">
+                <div class="ice"></div>
+                <div class="stick"></div>
+            </div>
+            <div class="shadow"></div>
+        </div>
+        <div class="popsicle-unit rainbow2">
+            <div class="popsicle">
+                <div class="ice"></div>
+                <div class="stick"></div>
+            </div>
+            <div class="shadow"></div>
+        </div>
+        <div class="popsicle-unit rainbow">
+            <div class="popsicle">
+                <div class="ice"></div>
+                <div class="stick"></div>
+            </div>
+            <div class="shadow"></div>
+        </div>
+    </div>
+    <!-- <img src="stick_yellow.png" top="100px"> -->
+  </body>
+  <script src="env.js"></script>
+  <script src="stomp.min.js"></script>
+  <script>
+    var heartrate = 50;
+
+    console.log(connect());
+    function connect(){
+        var p = new Promise(function (resolve, reject) {
+			try {
+				stompClient = Stomp.client(env.getWsUrl())
+				stompClient.connect({}, function(frame) {
+
+					// stompClient.subscribe('/topic/intersection/'+current_intersection_id+'/storage_space_speed', function(resp) {
+					// 	var msg=JSON.parse(resp.body);
+						
+                    //     heartrate-=5;
+                    //     $(".block").css("height",heartrate);
+					// });
+                },errorCallback);	
+				
+				resolve("Success in connect().");
+			} catch (e) {
+				reject("Fail in connect().");
+				$("#loading").show();
+			}
+		});
+		return p;
+    }
+
+    $("#increaseBtn").on("click",function(){
+      heartrate-=5;
+      $(".block").css("height",heartrate);
+    });
+    $("#decreaseBtn").on("click",function(){
+      heartrate+=5;
+      $(".block").css("height",heartrate);
+    });
+    
+  </script>
 </html>
