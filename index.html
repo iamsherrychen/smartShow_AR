@@ -6,7 +6,6 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <title>smartShow_AR</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <style>
     * {
@@ -54,7 +53,17 @@
       height: 10%;
       background: rgb(44, 43, 43);
       border-radius:25px 25px 0 0;
+      transition: all 0.3s;
       /* transform: translate(-50%, -50%); */
+    }
+
+    .message {
+        position: absolute;
+        top: 150px;
+        left: 50%;
+    }
+    .msg {
+        position:relative;
     }
     /* stick style */
     .flex-container {
@@ -73,8 +82,8 @@
     .popsicle {
         display: block;
         position: relative;
-        -webkit-animation: floating 2s ease infinite;
-                animation: floating 2s ease infinite;
+        -webkit-animation: floating 1s ease infinite;
+                animation: floating 1s ease infinite;
     }
     .ice {
         box-sizing: border-box;
@@ -128,8 +137,8 @@
         margin-right: auto;
         margin-left: auto;
         background-color: rgba(0,0,0,0.05);
-        -webkit-animation: floating-shadow 2s ease infinite;
-                animation: floating-shadow 2s ease infinite;
+        -webkit-animation: floating-shadow 1s ease infinite;
+                animation: floating-shadow 1s ease infinite;
     }
     .rainbow .ice {
         background-image: linear-gradient(to bottom, #ffbced 8%, #74e2fa 33%, #7892fd 66%, #ffbced 92%);
@@ -146,7 +155,7 @@
                 animation: rainbow 3s linear infinite;
     }
     @-webkit-keyframes floating {
-        0% {
+        /* 0% {
             transform: rotate(-20deg) translateY(5px);
         }
         50% {
@@ -154,17 +163,29 @@
         }
         100% {
             transform: rotate(-20deg) translateY(5px);
+        } */
+        0% {
+            transform: rotateZ(-40deg) translate(0%, 0%);
+        }
+        50% {
+            transform: rotateZ(40deg) translate(0%, 0%);
+        }
+        100% {
+            transform: rotateZ(-40deg) translate(0%, 0%);
         }
     }
     @keyframes floating {
         0% {
-            transform: rotate(-20deg) translateY(5px);
+            transform-origin: (50%, 100%);
+            transform: rotateZ(-40deg) translate(0%, 0%);
         }
         50% {
-            transform: rotate(-20deg) translateY(15px);
+            transform-origin: (50%, 100%);
+            transform: rotateZ(40deg) translate(0%, 0%);
         }
         100% {
-            transform: rotate(-20deg) translateY(5px);
+            transform-origin: (50%, 100%);
+            transform: rotateZ(-40deg) translate(0%, 0%);
         }
     }
     @-webkit-keyframes floating-shadow {
@@ -208,29 +229,21 @@
     </style>
   </head>
   <body>
-    <!-- <div class="wrapper">
-      <span class="instructions">The progress bubble below can transition between red, orange, and green depending on the current percentage.</span>
-      <span class="instructions">Go ahead and try it out by using the text box below.</span>
-      
-      <div class="orange">
-        <div class="progress">
-          <div class="inner">
-            <div class="percent"><span>50</span>%</div>
-            <div class="water"></div>
-            <div class="glare"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <a href="{{url_for('test')}}">我是測試</a>
-    <img src="people.png" width="100%"> -->
-    <button type="button" id="increaseBtn" style="top:30px">+</button>
-    <button type="button" id="decreaseBtn" style="top:70px">-</button>
+    <!-- <button type="button" id="increaseBtn" style="top:30px">+</button>
+    <button type="button" id="decreaseBtn" style="top:70px">-</button> -->
     <div class="progress" >
-      <video class="percentage" controls autoplay loop>
+      <video class="percentage" controls autoplay loop muted>
         <source src="fire3.mp4" type="video/mp4">
       </video>  
       <div class="block"></div>
+    </div>
+    <div class="message">
+        <p class="msg"><font id="user1" color="#1eadd8" font-weight="bold" face="monospace"></font><font id="chat1" color="#292929" font-weight="bold" face="monospace"></font></p>
+        <p class="msg"><font id="user2" color="#1eadd8" font-weight="bold" face="monospace"></font><font id="chat2" color="#292929" font-weight="bold" face="monospace"></font></p>
+        <p class="msg"><font id="user3" color="#1eadd8" font-weight="bold" face="monospace"></font><font id="chat3" color="#292929" font-weight="bold" face="monospace"></font></p>
+        <p class="msg"><font id="user4" color="#1eadd8" font-weight="bold" face="monospace"></font><font id="chat4" color="#292929" font-weight="bold" face="monospace"></font></p>
+        <p class="msg"><font id="user5" color="#1eadd8" font-weight="bold" face="monospace"></font><font id="chat5" color="#292929" font-weight="bold" face="monospace"></font></p>
+        <p class="msg"><font id="user6" color="#1eadd8" font-weight="bold" face="monospace"></font><font id="chat6" color="#292929" font-weight="bold" face="monospace"></font></p>
     </div>
     <div class="flex-container">
         <div class="popsicle-unit rainbow2">
@@ -261,46 +274,112 @@
             </div>
             <div class="shadow"></div>
         </div>
+        <div class="popsicle-unit rainbow2">
+            <div class="popsicle">
+                <div class="ice"></div>
+                <div class="stick"></div>
+            </div>
+            <div class="shadow"></div>
+        </div>
+        <div class="popsicle-unit rainbow">
+            <div class="popsicle">
+                <div class="ice"></div>
+                <div class="stick"></div>
+            </div>
+            <div class="shadow"></div>
+        </div>
+        <div class="popsicle-unit rainbow2">
+            <div class="popsicle">
+                <div class="ice"></div>
+                <div class="stick"></div>
+            </div>
+            <div class="shadow"></div>
+        </div>
+        <div class="popsicle-unit rainbow">
+            <div class="popsicle">
+                <div class="ice"></div>
+                <div class="stick"></div>
+            </div>
+            <div class="shadow"></div>
+        </div>
     </div>
-    <!-- <img src="stick_yellow.png" top="100px"> -->
   </body>
   <script src="env.js"></script>
   <script src="stomp.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script>
     var heartrate = 50;
-
+    let user = [];
+    let chat_msg = [];
+    // var Stomp = require('@stomp/stompjs');
+    const errorCallback = () => {};
     console.log(connect());
     function connect(){
         var p = new Promise(function (resolve, reject) {
 			try {
-				stompClient = Stomp.client(env.getWsUrl())
-				stompClient.connect({}, function(frame) {
-
-					// stompClient.subscribe('/topic/intersection/'+current_intersection_id+'/storage_space_speed', function(resp) {
-					// 	var msg=JSON.parse(resp.body);
+				// stompClient = Stomp.client('ws://20.195.231.99:9000')
+                // console.log('here')
+				// stompClient.connect({}, function(frame) {
+                //     console.log(frame)
+				// 	stompClient.subscribe('/', function(resp) {
+				// 		// var msg=JSON.parse(resp);
+                //         console.log(resp)
 						
-                    //     heartrate-=5;
-                    //     $(".block").css("height",heartrate);
-					// });
-                },errorCallback);	
-				
-				resolve("Success in connect().");
+                //         // heartrate-=5;
+                //         // $(".block").css("height",heartrate);
+				// 	});
+                // },errorCallback);	
+				// resolve("Success in connect().");
+                var ws = new WebSocket('ws://20.195.231.99:9000/');
+                ws.onopen = function () {
+                    console.log('socket connection opened properly');
+                    ws.send("Hello World"); // send a message
+                    console.log('message sent');
+                };
+
+                ws.onmessage = function (evt) {
+                    // console.log(JSON.parse(evt.data))
+                    var msg = JSON.parse(evt.data);
+
+                    heartrate = msg.heartRate;
+                    // console.log(typeof msg)
+                    $(".block").css("height",(100-(heartrate-50))*2.5);
+                    // console.log(Object.keys(msg).length);
+                    if (Object.keys(msg).length == 6){
+                        user = [];
+                        chat_msg = [];
+                        user.push(msg.user_1);
+                        user.push(msg.user_2);
+                        chat_msg.push(msg.chat_message_1);
+                        chat_msg.push(msg.chat_message_2);
+                        
+                        document.getElementById("user1").innerHTML = document.getElementById("user3").innerHTML;
+                        document.getElementById("user2").innerHTML = document.getElementById("user4").innerHTML;
+                        document.getElementById("chat1").innerHTML = document.getElementById("chat3").innerHTML;
+                        document.getElementById("chat2").innerHTML = document.getElementById("chat4").innerHTML;
+                        document.getElementById("user3").innerHTML = document.getElementById("user5").innerHTML;
+                        document.getElementById("user4").innerHTML = document.getElementById("user6").innerHTML;
+                        document.getElementById("chat3").innerHTML = document.getElementById("chat5").innerHTML;
+                        document.getElementById("chat4").innerHTML = document.getElementById("chat6").innerHTML;
+                        document.getElementById("user5").innerHTML = user[0];
+                        document.getElementById("user6").innerHTML = user[1];
+                        document.getElementById("chat5").innerHTML = chat_msg[0];
+                        document.getElementById("chat6").innerHTML = chat_msg[1];
+                    }
+                };
+
+                ws.onclose = function (e) {
+                    // websocket is closed.
+                    console.log("Connection closed...", e);
+                };
+
+                    
 			} catch (e) {
-				reject("Fail in connect().");
-				$("#loading").show();
+				// reject("Fail in connect().");
+                reject(e)
 			}
 		});
 		return p;
     }
-
-    $("#increaseBtn").on("click",function(){
-      heartrate-=5;
-      $(".block").css("height",heartrate);
-    });
-    $("#decreaseBtn").on("click",function(){
-      heartrate+=5;
-      $(".block").css("height",heartrate);
-    });
-    
   </script>
 </html>

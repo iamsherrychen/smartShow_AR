@@ -11,7 +11,6 @@
 //     console.log('close connection')
 // }
 window.env = {
-    isDev: false,
     getWsUrl: function() {
         return 'ws://20.195.231.99:9000';
     }
